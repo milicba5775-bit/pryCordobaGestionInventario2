@@ -207,7 +207,7 @@
             // btnEliminar
             // 
             this.btnEliminar.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnEliminar.Location = new System.Drawing.Point(548, 256);
+            this.btnEliminar.Location = new System.Drawing.Point(548, 254);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(126, 40);
             this.btnEliminar.TabIndex = 25;
