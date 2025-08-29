@@ -21,5 +21,11 @@ namespace pryCordobaGestionInventario
         {
 
         }
+
+        private void frmPrincipal_Load(object sender, EventArgs e)
+        {
+            clsConexionBD clsConexionBD = new clsConexionBD();
+            clsConexionBD.ConectarBD();
+        }
     }
 }
