@@ -17,13 +17,15 @@ namespace pryCordobaGestionInventario
     {
         //cadena de conexion
         //sql - string cadenaConexion = "Server=localhost;Database=Ventas2;Trusted_Connection=True;";
-        string cadenaConexion = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\Alumno\\source\\repos\\pryCordobaGestionInventario4\\pryCordobaGestionInventario\\Base de Datos\\producto.accdb";
+        string cadenaConexion = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\Alumno\\source\\repos\\pryCordobaGestionInventario2\\pryCordobaGestionInventario\\Base de Datos\\producto.accdb";
         //conector
         //SqlConnection coneccionBaseDatos;
         OleDbConnection coneccionBaseDatos;
         //comando
         //SqlCommand comandoBaseDatos;
         OleDbCommand comandoBaseDatos;
+
+        OleDbDataReader lectorDataReader;
 
         public string nombreBaseDeDatos;
 
@@ -44,6 +46,22 @@ namespace pryCordobaGestionInventario
             {
                 MessageBox.Show("Tiene un errorcito - " + error.Message);
             }     
+
+        }
+
+        public void CargarCategorias(ComboBox ListaCategoria)
+        {
+            comandoBaseDatos = new OleDbCommand();
+            comandoBaseDatos.Connection = coneccionBaseDatos;
+            comandoBaseDatos.CommandType = System.Data.CommandType.Text;
+
+            comandoBaseDatos.CommandText = "SELECT marca_nombre FROM Productos";
+
+            lectorDataReader = comandoBaseDatos.ExecuteReader();
+            while (lectorDataReader.Read())
+            {
+                ListaCategoria.Items.Add(lectorDataReader[0]);
+            }
 
         }
 
