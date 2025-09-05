@@ -25,6 +25,8 @@ namespace pryCordobaGestionInventario
         //SqlCommand comandoBaseDatos;
         OleDbCommand comandoBaseDatos;
 
+        OleDbDataReader lectorDataReader;
+
         public string nombreBaseDeDatos;
 
         public void ConectarBD()
@@ -45,6 +47,22 @@ namespace pryCordobaGestionInventario
                 MessageBox.Show("Tiene un errorcito - " + error.Message);
             }     
 
+        }
+
+        public void CargarCategoria(ComboBox ListaCategoria)
+        {
+            comandoBaseDatos = new OleDbCommand();
+            comandoBaseDatos.Connection = coneccionBaseDatos;
+            comandoBaseDatos.CommandType = System.Data.CommandType.Text;
+
+            comandoBaseDatos.CommandText = "SELECT marca_nombre FROM Productos";
+
+            lectorDataReader = comandoBaseDatos.ExecuteReader();
+            while (lectorDataReader.Read())
+            {
+                ListaCategoria.Items.Add(lectorDataReader[0]);
+            
+            }
         }
 
 
