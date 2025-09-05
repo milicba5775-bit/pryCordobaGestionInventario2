@@ -26,8 +26,6 @@ namespace pryCordobaGestionInventario
         {
             clsConexionBD clsConexionBD = new clsConexionBD();
             clsConexionBD.ConectarBD();
-
-            clsConexionBD.CargarCategorias(cboCategorias);
         }
     }
 }
