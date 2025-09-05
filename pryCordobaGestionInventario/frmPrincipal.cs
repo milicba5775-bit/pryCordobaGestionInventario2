@@ -29,5 +29,18 @@ namespace pryCordobaGestionInventario
 
             clsConexionBD.CargarCategoria(cboCategoria);
         }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            clsConexionBD clsConexionBD = new clsConexionBD();
+            clsConexionBD.ConectarBD();
+
+            Int32 id = 0;
+            Int32 categoria = Convert.ToInt32(cboCategoria.Text);
+            String nombre = Convert.ToString(txtNombre.Text);
+            string descripcion = Convert.ToString(txtDescripcion.Text);
+
+            clsConexionBD.AgregarProductos(id,categoria,nombre,descripcion);
+        }
     }
 }

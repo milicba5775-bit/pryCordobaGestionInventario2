@@ -40,7 +40,7 @@ namespace pryCordobaGestionInventario
 
                 coneccionBaseDatos.Open();
                 
-                MessageBox.Show("Conectado a " + nombreBaseDeDatos);
+               // MessageBox.Show("Conectado a " + nombreBaseDeDatos);
             }
             catch (Exception error)
             {
@@ -65,6 +65,14 @@ namespace pryCordobaGestionInventario
             }
         }
 
+        public void AgregarProductos(Int32 id,Int32 categoria, String nombre, string descripcion)
+        {
+            comandoBaseDatos = new OleDbCommand();
+            comandoBaseDatos.Connection = coneccionBaseDatos;
+            comandoBaseDatos.CommandType = System.Data.CommandType.Text;
+            comandoBaseDatos.CommandText = $"INSERT INTO Productos (id,categoria_de_producto, marca_nombre, observaciones) VALUES ({id},{categoria}, {nombre},{descripcion})";
+            lectorDataReader = comandoBaseDatos.ExecuteReader();
+        }
 
 
     }
