@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsConexionBD_v2 - Copia.cs" />
     <Compile Include="clsConexionBD_v2.cs" />
     <Compile Include="frmPrincipal.cs">
       <SubType>Form</SubType>

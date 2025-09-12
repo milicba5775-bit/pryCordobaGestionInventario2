@@ -13,19 +13,19 @@ using System.Windows.Forms;
 
 namespace pryCordobaGestionInventario
 {
-    internal class clsConexionBD
+    internal class clsConexionBDcopia
     {
         //cadena de conexion
-        //string cadenaConexion = "Server=localhost;Database=Ventas2;Trusted_Connection=True;";
-        string cadenaConexion = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\Alumno\\source\\repos\\pryCordobaGestionInventario2\\pryCordobaGestionInventario\\Base de Datos\\producto.accdb";
+         string cadenaConexion = "Server=localhost;Database=gestion;Trusted_Connection=True;";
+        //string cadenaConexion = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\Alumno\\source\\repos\\pryCordobaGestionInventario2\\pryCordobaGestionInventario\\Base de Datos\\producto.accdb";
         //conector
-        //SqlConnection coneccionBaseDatos;
-        OleDbConnection coneccionBaseDatos;
+        SqlConnection coneccionBaseDatos;
+        //OleDbConnection coneccionBaseDatos;
         //comando
-        //SqlCommand comandoBaseDatos;
-        OleDbCommand comandoBaseDatos;
+        SqlCommand comandoBaseDatos;
+        //OleDbCommand comandoBaseDatos;
 
-        OleDbDataReader lectorDataReader;
+        SqlDataReader lectorDataReader;
 
         public string nombreBaseDeDatos;
 
@@ -33,8 +33,8 @@ namespace pryCordobaGestionInventario
         {
             try
             {
-                //coneccionBaseDatos = new SqlConnection(cadenaConexion);
-                coneccionBaseDatos = new OleDbConnection(cadenaConexion);
+                coneccionBaseDatos = new SqlConnection(cadenaConexion);
+                //coneccionBaseDatos = new OleDbConnection(cadenaConexion);
 
                 nombreBaseDeDatos = coneccionBaseDatos.Database;
 
@@ -51,11 +51,11 @@ namespace pryCordobaGestionInventario
 
         public void CargarCategoria(ComboBox ListaCategoria)
         {
-            comandoBaseDatos = new OleDbCommand();
+            comandoBaseDatos = new SqlCommand();
             comandoBaseDatos.Connection = coneccionBaseDatos;
             comandoBaseDatos.CommandType = System.Data.CommandType.Text;
 
-            comandoBaseDatos.CommandText = "SELECT marca_nombre FROM Productos";
+            comandoBaseDatos.CommandText = "SELECT nombre FROM productos";
 
             lectorDataReader = comandoBaseDatos.ExecuteReader();
             while (lectorDataReader.Read())
@@ -65,12 +65,12 @@ namespace pryCordobaGestionInventario
             }
         }
 
-        public void AgregarProductos(Int32 id,Int32 categoria, String nombre, string descripcion)
+        public void AgregarProductos(string codigo, string nombre, string categoria, decimal precio, Int32 stock, string descripcion)
         {
-            comandoBaseDatos = new OleDbCommand();
+            comandoBaseDatos = new SqlCommand();
             comandoBaseDatos.Connection = coneccionBaseDatos;
             comandoBaseDatos.CommandType = System.Data.CommandType.Text;
-            comandoBaseDatos.CommandText = $"INSERT INTO Productos (id,categoria_de_producto, marca_nombre, observaciones) VALUES ({id},{categoria}, {nombre},{descripcion})";
+            comandoBaseDatos.CommandText = $"INSERT INTO Productos (codigo,nombre,categoria,precio,stock,descripcion) VALUES ('{codigo}','{nombre}','{categoria}', {precio}, {stock},'{descripcion}')";
             lectorDataReader = comandoBaseDatos.ExecuteReader();
         }
 

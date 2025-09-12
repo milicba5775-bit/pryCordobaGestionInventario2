@@ -24,7 +24,7 @@ namespace pryCordobaGestionInventario
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            clsConexionBD clsConexionBD = new clsConexionBD();
+            clsConexionBDcopia clsConexionBD = new clsConexionBDcopia();
             clsConexionBD.ConectarBD();
 
             clsConexionBD.CargarCategoria(cboCategoria);
@@ -32,15 +32,24 @@ namespace pryCordobaGestionInventario
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            clsConexionBD clsConexionBD = new clsConexionBD();
-            clsConexionBD.ConectarBD();
+            try 
+            {
+                clsConexionBDcopia clsConexionBD = new clsConexionBDcopia();
+                clsConexionBD.ConectarBD();
 
-            Int32 id = 0;
-            Int32 categoria = Convert.ToInt32(cboCategoria.Text);
-            String nombre = Convert.ToString(txtNombre.Text);
-            string descripcion = Convert.ToString(txtDescripcion.Text);
+                string codigo = txtCodigo.Text;
+                string nombre = txtNombre.Text;
+                string categoria = cboCategoria.Text;
+                decimal precio = Convert.ToDecimal(txtPrecio.Text);
+                Int32 stock = Convert.ToInt32(txtStock.Text);    
+                string descripcion = txtDescripcion.Text;
 
-            clsConexionBD.AgregarProductos(id,categoria,nombre,descripcion);
+                clsConexionBD.AgregarProductos(codigo, nombre, categoria, precio, stock, descripcion);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
     }
 }
