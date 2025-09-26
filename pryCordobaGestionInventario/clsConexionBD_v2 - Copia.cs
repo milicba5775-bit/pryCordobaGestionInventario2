@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+//para conexion de ACcess
+using System.Data.OleDb;
+using System.Data.Sql;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Sql;
-using System.Data.SqlClient;
-
-//para conexion de ACcess
-using System.Data.OleDb;
-
 using System.Windows.Forms;
 
 namespace pryCordobaGestionInventario
@@ -74,6 +73,57 @@ namespace pryCordobaGestionInventario
             lectorDataReader = comandoBaseDatos.ExecuteReader();
         }
 
+        public SqlDataReader BuscarProducto(string codigo)
+        {
+            comandoBaseDatos = new SqlCommand();
+            comandoBaseDatos.Connection = coneccionBaseDatos;
+            comandoBaseDatos.CommandType = System.Data.CommandType.Text;
+            comandoBaseDatos.CommandText = $"SELECT codigo, nombre, categoria, precio, stock, descripcion FROM Productos WHERE codigo = '{codigo}'";
+            lectorDataReader = comandoBaseDatos.ExecuteReader();
+            return lectorDataReader;
+        }
 
+        public void EliminarProducto(string codigo)
+        {
+            comandoBaseDatos = new SqlCommand();
+            comandoBaseDatos.Connection = coneccionBaseDatos;
+            comandoBaseDatos.CommandType = System.Data.CommandType.Text;
+            comandoBaseDatos.CommandText = $"DELETE FROM Productos WHERE codigo = '{codigo}'";
+            comandoBaseDatos.ExecuteNonQuery();
+        }
+
+        public void ModificarProducto(string codigo, string nombre, string categoria, decimal precio, Int32 stock, string descripcion)
+        {
+            comandoBaseDatos = new SqlCommand();
+            comandoBaseDatos.Connection = coneccionBaseDatos;
+            comandoBaseDatos.CommandType = System.Data.CommandType.Text;
+            comandoBaseDatos.CommandText = "UPDATE Productos SET nombre = @nombre, categoria = @categoria, precio = @precio, stock = @stock, descripcion = @descripcion WHERE codigo = @codigo";
+
+            comandoBaseDatos.Parameters.AddWithValue("@codigo", codigo);
+            comandoBaseDatos.Parameters.AddWithValue("@nombre", nombre);
+            comandoBaseDatos.Parameters.AddWithValue("@categoria", categoria);
+            comandoBaseDatos.Parameters.AddWithValue("@precio", precio);
+            comandoBaseDatos.Parameters.AddWithValue("@stock", stock);
+            comandoBaseDatos.Parameters.AddWithValue("@descripcion", descripcion);
+
+            comandoBaseDatos.ExecuteNonQuery();
+        }
+
+        public DataTable BuscarProductos(string consultaSQL)
+        {
+            DataTable dt = new DataTable();
+            SqlCommand comandoLocal = new SqlCommand(consultaSQL, coneccionBaseDatos);
+            SqlDataAdapter da = new SqlDataAdapter(comandoLocal);
+
+            try
+            {
+                da.Fill(dt);
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error al ejecutar la consulta SQL: " + error.Message);
+            }
+            return dt;
+        }
     }
 }
