@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace pryCordobaGestionInventario
 {
@@ -223,6 +224,37 @@ namespace pryCordobaGestionInventario
                 return "categoria";
             }
             return string.Empty; 
+        }
+
+
+        private void GenerarReporteInventario()
+        {
+            clsConexionBDcopia clsConexionBD = new clsConexionBDcopia();
+            clsConexionBD.ConectarBD();
+
+            string consultaSQL = "SELECT categoria,SUM(stock) AS TotalStock FROM Productos GROUP BY categoria";
+            DataTable dt = clsConexionBD.BuscarProductos(consultaSQL);
+
+            chartInventario.Series.Clear();
+            chartInventario.Titles.Clear();
+
+            chartInventario.Titles.Add("Reporte de Inventario por Categoría");
+
+            Series serie = new Series("Stock");
+            serie.ChartType = SeriesChartType.Column; // o SeriesChartType.Pie
+            serie.IsValueShownAsLabel = true;
+
+            foreach (DataRow fila in dt.Rows)
+            {
+                serie.Points.AddXY(fila["categoria"].ToString(), Convert.ToInt32(fila["TotalStock"]));
+            }
+
+            chartInventario.Series.Add(serie);
+        }
+
+        private void btnGenerar_Click_1(object sender, EventArgs e)
+        {
+            GenerarReporteInventario();
         }
     }
 }

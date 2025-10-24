@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -58,6 +61,8 @@
             this.txtValor = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnGenerar = new System.Windows.Forms.Button();
+            this.chartInventario = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -65,6 +70,8 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducto)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartInventario)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -367,12 +374,41 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.tabPage3.Controls.Add(this.chartInventario);
+            this.tabPage3.Controls.Add(this.btnGenerar);
             this.tabPage3.Location = new System.Drawing.Point(4, 41);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(827, 471);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Informe";
+            // 
+            // btnGenerar
+            // 
+            this.btnGenerar.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnGenerar.Location = new System.Drawing.Point(663, 414);
+            this.btnGenerar.Name = "btnGenerar";
+            this.btnGenerar.Size = new System.Drawing.Size(148, 40);
+            this.btnGenerar.TabIndex = 30;
+            this.btnGenerar.Text = "Generar";
+            this.btnGenerar.UseVisualStyleBackColor = false;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click_1);
+            // 
+            // chartInventario
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chartInventario.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartInventario.Legends.Add(legend3);
+            this.chartInventario.Location = new System.Drawing.Point(26, 42);
+            this.chartInventario.Name = "chartInventario";
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartInventario.Series.Add(series3);
+            this.chartInventario.Size = new System.Drawing.Size(784, 340);
+            this.chartInventario.TabIndex = 31;
+            this.chartInventario.Text = "chart1";
             // 
             // frmPrincipal
             // 
@@ -396,6 +432,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducto)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartInventario)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -432,5 +470,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton optCategoria;
         private System.Windows.Forms.DataGridView dgvProducto;
+        private System.Windows.Forms.Button btnGenerar;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartInventario;
     }
 }
