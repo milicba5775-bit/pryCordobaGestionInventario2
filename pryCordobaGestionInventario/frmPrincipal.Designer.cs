@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -61,8 +61,8 @@
             this.txtValor = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.btnGenerar = new System.Windows.Forms.Button();
             this.chartInventario = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btnGenerar = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -295,6 +295,7 @@
             this.dgvProducto.RowTemplate.Height = 24;
             this.dgvProducto.Size = new System.Drawing.Size(752, 290);
             this.dgvProducto.TabIndex = 30;
+            this.dgvProducto.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvProducto_CellFormatting);
             // 
             // groupBox2
             // 
@@ -383,6 +384,22 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Informe";
             // 
+            // chartInventario
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartInventario.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartInventario.Legends.Add(legend1);
+            this.chartInventario.Location = new System.Drawing.Point(26, 42);
+            this.chartInventario.Name = "chartInventario";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartInventario.Series.Add(series1);
+            this.chartInventario.Size = new System.Drawing.Size(784, 340);
+            this.chartInventario.TabIndex = 31;
+            this.chartInventario.Text = "chart1";
+            // 
             // btnGenerar
             // 
             this.btnGenerar.BackColor = System.Drawing.Color.SteelBlue;
@@ -393,22 +410,6 @@
             this.btnGenerar.Text = "Generar";
             this.btnGenerar.UseVisualStyleBackColor = false;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click_1);
-            // 
-            // chartInventario
-            // 
-            chartArea3.Name = "ChartArea1";
-            this.chartInventario.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartInventario.Legends.Add(legend3);
-            this.chartInventario.Location = new System.Drawing.Point(26, 42);
-            this.chartInventario.Name = "chartInventario";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartInventario.Series.Add(series3);
-            this.chartInventario.Size = new System.Drawing.Size(784, 340);
-            this.chartInventario.TabIndex = 31;
-            this.chartInventario.Text = "chart1";
             // 
             // frmPrincipal
             // 

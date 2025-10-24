@@ -256,5 +256,31 @@ namespace pryCordobaGestionInventario
         {
             GenerarReporteInventario();
         }
+
+        private void dgvProducto_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+            if (dgvProducto.Columns[e.ColumnIndex].Name == "stock" && e.Value != null)
+            {
+                int stock = Convert.ToInt32(e.Value);
+
+                if (stock < 3)
+                {
+                    e.CellStyle.BackColor = Color.Red;
+                    e.CellStyle.ForeColor = Color.White;
+                    e.CellStyle.Font = new Font(dgvProducto.Font, FontStyle.Bold);
+                }
+                else if (stock > 10)
+                {
+                    e.CellStyle.BackColor = Color.LightGreen;
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    e.CellStyle.BackColor = Color.White;
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+            }
+        }
     }
 }
