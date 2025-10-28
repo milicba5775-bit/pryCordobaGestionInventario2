@@ -232,24 +232,30 @@ namespace pryCordobaGestionInventario
             clsConexionBDcopia clsConexionBD = new clsConexionBDcopia();
             clsConexionBD.ConectarBD();
 
-            string consultaSQL = "SELECT categoria,SUM(stock) AS TotalStock FROM Productos GROUP BY categoria";
+            string consultaSQL = "SELECT nombre, SUM(stock) AS TotalStock FROM Productos GROUP BY nombre";
             DataTable dt = clsConexionBD.BuscarProductos(consultaSQL);
 
             chartInventario.Series.Clear();
             chartInventario.Titles.Clear();
 
-            chartInventario.Titles.Add("Reporte de Inventario por Categoría");
+            chartInventario.Titles.Add("Reporte de Inventario");
 
             Series serie = new Series("Stock");
-            serie.ChartType = SeriesChartType.Column; // o SeriesChartType.Pie
+            serie.ChartType = SeriesChartType.Column; 
             serie.IsValueShownAsLabel = true;
 
             foreach (DataRow fila in dt.Rows)
             {
-                serie.Points.AddXY(fila["categoria"].ToString(), Convert.ToInt32(fila["TotalStock"]));
+                serie.Points.AddXY(fila["nombre"].ToString(), Convert.ToInt32(fila["TotalStock"]));
             }
 
             chartInventario.Series.Add(serie);
+
+            chartInventario.ChartAreas[0].AxisX.Interval = 1; 
+            chartInventario.ChartAreas[0].AxisX.LabelStyle.Angle = -45; 
+            chartInventario.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 9, FontStyle.Bold);
+            chartInventario.ChartAreas[0].AxisX.MajorGrid.Enabled = false; 
+
         }
 
         private void btnGenerar_Click_1(object sender, EventArgs e)
